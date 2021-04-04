@@ -7,7 +7,6 @@ Date: 1 April 2021
 Developed at: CICT, Villa College
 
 */
-
 namespace sha443\rbac\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -29,10 +28,9 @@ class MenuBuilder extends Controller
     | Menu Builder
     |--------------------------------------------------------------------------
     |
-    | 
+    | Builds role based menu and returns array of menu objects
     |
     */
-
     /**
      * Create a new controller instance.
      *
@@ -40,8 +38,8 @@ class MenuBuilder extends Controller
      */
     public function __construct()
     {
-        // user must login and pass the access middleware
-        $this->middleware(['auth', 'web']);
+        // user must login and pass the auth, rbac middleware
+        $this->middleware(['web', 'auth', 'rbac']);
     }
 
     /**
@@ -64,6 +62,7 @@ class MenuBuilder extends Controller
         
         return $menu_items;
     }
+
     /**
     * @return array
     */
@@ -87,4 +86,5 @@ class MenuBuilder extends Controller
         return $menu_items;
     }
 }
+
 ?>

@@ -20,7 +20,7 @@ class RBACServiceProvider extends ServiceProvider
         $this->loadMigrationsFrom(__DIR__.'/database/migrations');
         
         // push middleware to the web group
-        $this->app['router']->pushMiddlewareToGroup('web', \sha443\rbac\Http\Middleware\RolesAuth::class);       
+        $this->app['router']->pushMiddlewareToGroup('rbac', \sha443\rbac\Http\Middleware\RolesAuth::class);       
     }
 
     /**

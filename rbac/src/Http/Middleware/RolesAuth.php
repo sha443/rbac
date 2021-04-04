@@ -36,9 +36,9 @@ class RolesAuth
     {
         if(!Auth::user())
         {
-            return redirect('/home');
-        } 
-
+            return redirect('/login');
+        }
+        
         // this action name
         $action = class_basename($request->route()->getActionname());
 
