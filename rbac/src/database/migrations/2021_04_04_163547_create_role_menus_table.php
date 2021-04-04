@@ -18,6 +18,8 @@ class CreateRoleMenusTable extends Migration {
 			$table->integer('role_id');
 			$table->integer('menu_id');
 			$table->timestamps();
+
+			$table->unique(['menu_id','role_id'], 'role_menu_key');
 		});
 	}
 

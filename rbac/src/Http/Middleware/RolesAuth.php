@@ -13,6 +13,8 @@ namespace sha443\rbac\Http\Middleware;
 use Closure;
 use Auth;
 
+use sha443\rbac\facades\RBAC;
+
 // Laravel app default user
 use App\User;
 
@@ -39,48 +41,16 @@ class RolesAuth
             return redirect('/login');
         }
         
-        // this action name
-        $action = class_basename($request->route()->getActionname());
-
         // Logged user
         $user_id = auth()->user()->id;
-
-        // get user role-permissions by logged user id
-        $user_roles = UserRole::where('user_id', $user_id)->get();
-
-        if($user_roles)
+        
+        if(RBAC::isRequestPassed($user_id, $request))
         {
-            foreach ($user_roles as $key => $role)
-            {
-                // get permissions by role
-                $role_permissions = RolePermission::with('permission')->where('role_id', $role->role_id)->get();
-
-                if($this->checkRolePermissionAccess($action, $role_permissions))
-                {
-                    // access granted
-                    return $next($request);
-                }
-            }
+            // access granted
+            return $next($request);
         }
 
         // access denied
-        return response(["message" => "Access Denied!"], 203);
-    }
-
-    protected function checkRolePermissionAccess($action, $role_permissions)
-    {
-        // check if requested action is in permissions list
-        foreach ($role_permissions as $role_permission)
-        {
-            $_namespaces_chunks = explode('\\', $role_permission->permission->controller);
-            $controller = end($_namespaces_chunks);
-            
-            if ($action == $controller . '@' . $role_permission->permission->method)
-            {
-                return true;
-            }
-        }
-
-        return false;
+        return response(["message" => "Access Denied!"], 403);
     }
 }

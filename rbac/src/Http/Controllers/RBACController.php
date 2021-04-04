@@ -36,6 +36,9 @@ class RBACController extends Controller
      */
     protected $redirectTo = '/';
 
+    protected static $menuBuilder;
+    protected static $accessChecker;
+
     /**
      * Create a new controller instance.
      *
@@ -43,22 +46,46 @@ class RBACController extends Controller
      */
     public function __construct()
     {
+      self::$menuBuilder = MenuBuilder::getInstance();
+      self::$accessChecker = AccessChecker::getInstance();
     }
 
     public function test()
     {
         return response(['message'=>'Passed'], 200);
     }
+    public function passed(Request $request, $user_id)
+    {
+      if(self::isRequestPassed($user_id, $request))
+      {
+        return response(['message'=>'passed'], 200);
+      }
+      return response(['message'=>'failed'], 403);
+    }
     public function getMenu()
     {
        // $data = MenuBuilder::getMenuItems();
        // $data = MenuBuilder::getMenuByLevel();
-       $data = MenuBuilder::getMenuByLevel(1);
+       $data = self::getMenuByLevel(1, 1);
        foreach ($data as $key => $menu)
        {
            echo "<a href=".$menu['action'].">".$menu['display_name']."<br>";
        }
-       // dd($data);
+    }
+
+    public static function getMenuItems($user_id)
+    {
+      return self::$menuBuilder->getMenuItems($user_id);
+    }
+
+    public static function getMenuByLevel($user_id, $level=0)
+    {
+      return self::$menuBuilder->getMenuByLevel($user_id, $level);
+    }
+
+    public static function isRequestPassed($user_id, $request)
+    {
+      return self::$accessChecker->isRequestPassed($user_id, $request);
     }
 }
 ?>

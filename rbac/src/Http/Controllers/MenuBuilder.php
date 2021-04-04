@@ -31,47 +31,60 @@ class MenuBuilder extends Controller
     | Builds role based menu and returns array of menu objects
     |
     */
+
+    protected static $instance = null;
     /**
      * Create a new controller instance.
      *
      * @return void 
      */
-    public function __construct()
+    private function __construct()
     {
-        // user must login and pass the auth, rbac middleware
-        $this->middleware(['web', 'auth', 'rbac']);
+
+    }
+
+    public static function getInstance()
+    {
+        // Lazy Initilaization
+        if (self::$instance == null)
+        {
+          self::$instance = new MenuBuilder();
+        }
+        return self::$instance;
     }
 
     /**
     * @return array
     */
-    public static function getMenuItems()
+    public function getMenuItems($user_id)
     {
         $menu_items = array();
 
-        $user_id = auth()->user()->id;
         $user_roles = UserRole::where('user_id', $user_id)->get();
         foreach ($user_roles as $key => $role)
         {
             $role_menus = RoleMenu::with('menu')->where('role_id', $role->role_id)->get();
             foreach ($role_menus as $key => $menus)
             {
-                $menu_items[] = $menus->menu;
+                if(!is_null($menus->menu))
+                {
+                    $menu_items[] = $menus->menu;
+                }
             }
         }
         
-        return $menu_items;
+        return array_unique($menu_items);
     }
 
     /**
     * @return array
     */
-    public static function getMenuByLevel($level=0)
+    public function getMenuByLevel($user_id, $level=0)
     {
         $menu_items = array();
 
-        $user_id = auth()->user()->id;
         $user_roles = UserRole::where('user_id', $user_id)->get();
+
         foreach ($user_roles as $key => $role)
         {
             $role_menus = RoleMenu::with(['menu' => function($query) use ($level){
@@ -80,10 +93,14 @@ class MenuBuilder extends Controller
 
             foreach ($role_menus as $key => $menus)
             {
-                $menu_items[] = $menus->menu;
+                if(!is_null($menus->menu))
+                {
+                    $menu_items[] = $menus->menu;
+                }
             }
         }
-        return $menu_items;
+
+        return array_unique($menu_items);
     }
 }
 

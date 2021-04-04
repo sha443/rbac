@@ -34,8 +34,9 @@ class RBACServiceProvider extends ServiceProvider
 
         // $this->app->make('sha443\rbac\Http\Controllers\RBACController');
 
-        $this->app->singleton(RBACController::class, function (){
-            return new RBACController();
+        // RBAC Facades
+        $this->app->singleton(RBAC::class, function (){
+            return new RBAC();
         });
 
         // $this->bindClasses();

@@ -3,7 +3,7 @@ namespace sha443\rbac\database\seeds;
 
 use Illuminate\Database\Seeder;
 
-class PackageSeeder extends Seeder
+class RBACSeeder extends Seeder
 {
     /**
      * Run the database seeds.
