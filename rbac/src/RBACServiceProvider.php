@@ -1,0 +1,49 @@
+<?php
+
+namespace sha443\rbac;
+
+use Illuminate\Support\ServiceProvider;
+
+class RBACServiceProvider extends ServiceProvider
+{
+    /**
+     * Bootstrap the application services.
+     *
+     * @return void
+     */
+    public function boot()
+    {
+        // load routes
+        $this->loadRoutesFrom(__DIR__.'/routes/web.php', 'rbac');
+
+        // load migrations
+        $this->loadMigrationsFrom(__DIR__.'/database/migrations');
+        
+        // push middleware to the web group
+        $this->app['router']->pushMiddlewareToGroup('web', \sha443\rbac\Http\Middleware\RolesAuth::class);       
+    }
+
+    /**
+     * Register the application services.
+     *
+     * @return void
+     */
+    public function register()
+    {
+        // $this->mergeConfigFrom(__DIR__.'/config/rbac.php','rbac');
+
+        // $this->app->make('sha443\rbac\Http\Controllers\RBACController');
+
+        $this->app->singleton(RBACController::class, function (){
+            return new RBACController();
+        });
+
+        // $this->bindClasses();
+    }
+
+    // bind package classes to laravel app
+    // protected function bindClasses(): void
+    // {
+    //     $this->app->bind(Test::class);
+    // }
+}

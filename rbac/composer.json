@@ -1,0 +1,25 @@
+{
+    "name": "sha443/rbac",
+    "description": "A laravel package for role-based access control (RBAC).",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Mohamed Shahidul Islam",
+            "email": "shahidcseku@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "sha443\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "sha443\\rbac\\RBACServiceProvider"
+            ]
+        }
+    }
+}
