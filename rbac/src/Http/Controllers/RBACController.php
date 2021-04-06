@@ -10,14 +10,13 @@ Developed at: CICT, Villa College
 
 namespace sha443\rbac\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use Auth;
 
 use App\User;
 
-class RBACController extends Controller
+class RBACController extends LaravelController
 {
     /*
     |--------------------------------------------------------------------------

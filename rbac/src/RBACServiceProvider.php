@@ -18,9 +18,17 @@ class RBACServiceProvider extends ServiceProvider
 
         // load migrations
         $this->loadMigrationsFrom(__DIR__.'/database/migrations');
+
+        // load views
+        $this->loadViewsFrom(__DIR__.'/views/', 'rbac');
         
         // push middleware to the web group
-        $this->app['router']->pushMiddlewareToGroup('rbac', \sha443\rbac\Http\Middleware\RolesAuth::class);       
+        $this->app['router']->pushMiddlewareToGroup('rbac', \sha443\rbac\Http\Middleware\RolesAuth::class);
+
+        // publish assets
+        $this->publishes(
+            [__DIR__.'/public/' => public_path('vendor/rbac'), ]
+            , 'public');       
     }
 
     /**

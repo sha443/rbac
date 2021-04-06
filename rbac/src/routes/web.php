@@ -7,8 +7,41 @@
 // Please do not modify the middleware order
 Route::group(['middleware'=>['web', 'auth', 'rbac']], function(){
 	Route::get('/rbac-test', '\sha443\rbac\Http\Controllers\RBACController@test')->name('test');
-	// Route::get('/rbac-menu', '\sha443\rbac\Http\Controllers\RBACController@getMenu');
 	Route::get('/rbac-passed/{id}', '\sha443\rbac\Http\Controllers\RBACController@passed' );
+
+	// ===================================
+	// Settings routes [SuperAdmin]
+	// ===================================
+
+	// User CRUD route
+
+	// Role CRUD route
+	Route::get('/role','sha443\rbac\Http\Controllers\RoleController@index');
+	Route::post('/role/','sha443\rbac\Http\Controllers\RoleController@addEdit');
+
+	// User Role CRUD route
+	Route::get('/user-role','sha443\rbac\Http\Controllers\UserRoleController@index');
+	Route::post('/user-role','sha443\rbac\Http\Controllers\UserRoleController@searchOrStore');
+	Route::get('/user-role/edit/{id}','sha443\rbac\Http\Controllers\UserRoleController@edit');
+	Route::put('/user-role/{id}','sha443\rbac\Http\Controllers\UserRoleController@update');
+
+	// Role Permission CRUD route
+	Route::get('/role-permission','sha443\rbac\Http\Controllers\RolePermissionController@index');
+	Route::get('/role-permission/create','sha443\rbac\Http\Controllers\RolePermissionController@create');
+	Route::get('/role-permission/old-permission','sha443\rbac\Http\Controllers\RolePermissionController@oldPermission');
+	Route::post('/role-permission','sha443\rbac\Http\Controllers\RolePermissionController@store');
+	Route::get('/role-permission/edit/{id}','sha443\rbac\Http\Controllers\RolePermissionController@edit');
+	Route::put('/role-permission/{id}','sha443\rbac\Http\Controllers\RolePermissionController@update');
+
+	// Menu CRUD route
+	Route::get('/menu','sha443\rbac\Http\Controllers\MenuController@index');
+	Route::post('/menu','sha443\rbac\Http\Controllers\MenuController@addEdit');
+
+	// Role Menu CRUD route
+	Route::get('/role-menu','sha443\rbac\Http\Controllers\RoleMenuController@index');
+	Route::get('/role-menu/create','sha443\rbac\Http\Controllers\RoleMenuController@create');
+	Route::post('/role-menu','sha443\rbac\Http\Controllers\RoleMenuController@store');
+	Route::get('/role-menu/old-menu','sha443\rbac\Http\Controllers\RoleMenuController@oldMenu');
 });
 
 // must be used with middlewares
