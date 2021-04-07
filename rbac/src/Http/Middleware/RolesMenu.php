@@ -41,11 +41,37 @@ class RolesMenu
             return redirect('/login');
         }
         
+        // Menu builder arrays
+        $main_menu = array();
+        $settings_menu = array();
+        $others_menu = array();
+
         // Logged user || no need to check access as already passed rolesauth middleware
         $user_id = auth()->user()->id;
-            
-        $menu = RBAC::getMenuItems($user_id);
-        dd($menu);
+        $menus = RBAC::getMenuItems($user_id);
+
+        // Buildup the menu
+        foreach($menus as $menu)
+        {
+            if($menu->level==1)
+            {
+                array_push($main_menu, $menu);
+            }
+            else if($menu->level==2)
+            {
+                array_push($settings_menu, $menu);
+            }
+            else if($menu->level==3)
+            {
+                array_push($others_menu, $menu);
+            }
+        }  
+
+        // Save as config
+        config(['app.main_menu' => $main_menu]);
+        config(['app.settings_menu' => $settings_menu]);
+        config(['app.others_menu' => $others_menu]);
+
         return $next($request);
     }
 }

@@ -36,7 +36,7 @@
 
             <li class="header">Main Menu</li>
              @foreach($main_menu as $manu_item)
-                <li><a href="{{ $manu_item->menu->action }}"> <i class="{{ $manu_item->menu->icon }}"></i> <span> {{ $manu_item->menu->display_name }}</span> </a></li>
+                <li><a href="{{ $manu_item->action }}"> <i class="{{ $manu_item->icon }}"></i> <span> {{ $manu_item->display_name }}</span> </a></li>
             @endforeach
         @endif
 
@@ -44,7 +44,7 @@
         @if(isset($settings_menu) && count($settings_menu)>0)
             <li class="header">Admin Menu</li>
             @foreach($settings_menu as $manu_item)
-                <li><a href="{{ $manu_item->menu->action }}"> <i class="{{ $manu_item->menu->icon }}"></i> <span> {{ $manu_item->menu->display_name }}</span> </a></li>
+                <li><a href="{{ $manu_item->action }}"> <i class="{{ $manu_item->icon }}"></i> <span> {{ $manu_item->display_name }}</span> </a></li>
             @endforeach
         @endif
 
@@ -55,7 +55,7 @@
         @if((isset($others_menu) && count($others_menu)>0) || isset($hod_menu))
             <li class="header">Special Menu </li>
             @foreach($others_menu as $manu_item)
-                <li><a href="{{ $manu_item->menu->action }}"> <i class="{{ $manu_item->menu->icon }}"></i> <span> {{ $manu_item->menu->display_name }}</span> </a></li>
+                <li><a href="{{ $manu_item->action }}"> <i class="{{ $manu_item->icon }}"></i> <span> {{ $manu_item->display_name }}</span> </a></li>
             @endforeach
 
             <li><a href="{{ $hod_menu['action'] }}"> <i class="{{ $hod_menu['icon'] }}"></i> <span> {{ $hod_menu['display_name'] }}</span> </a></li>

@@ -7,7 +7,6 @@
 # shahidcseku@gmail.com
 #==========================
 
-
 namespace sha443\rbac\Http\Controllers;
 
 use sha443\rbac\Models\RoleMenu;
@@ -42,21 +41,13 @@ class RoleMenuController extends LaravelController
         $role_list = Role::get()->where('active',1);
         $role_menu_list = RoleMenu::with('menu','role')->paginate(20);
 
-        if($role_id!=NULL)
-        {
-
-            return view('rolemenus.create',compact('role_menu_list','menu_list','role_list','title','role_id','old_role_menu_id_array'));
-        }
-        else
-        {
-            return view('rbac::rolemenus.create',compact('role_menu_list','menu_list','role_list','title'));
-        }
+        return view('rbac::rolemenus.create',compact('role_menu_list','menu_list','role_list','title','role_id','old_role_menu_id_array'));
     }
 
      public function oldMenu(Request $request)
     {
         $role_id = $request->input('role_id');
-        $old_role_menus = RoleMenu::get()->where('role_id',$role_id);
+        $old_role_menus = RoleMenu::get()->where('role_id', $role_id);
 
        $old_role_menu_id_array = array();
        foreach ($old_role_menus as $old_role_menu)
@@ -122,6 +113,6 @@ class RoleMenuController extends LaravelController
     public function revokeRoleMenu($role_id, $menu_id)
     {
         RoleMenu::where('role_id',$role_id)->where('menu_id',$menu_id)->delete();
-        return True;
+        return true;
     }
 }

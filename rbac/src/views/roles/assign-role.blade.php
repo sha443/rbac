@@ -19,7 +19,7 @@
 			                <label>User</label>
 			                 <select class="form-control select2" style="width: 100%;" name="user_id">
 			             	@foreach($user_list as $user)
-			             		<option value="{{ $user->id  }}">{{ $user->full_name }} ({{ $user->username }})</option>
+			             		<option value="{{ $user->id  }}">{{ $user->name }} ({{ $user->email }})</option>
 			             	@endforeach
 		                </select>
 		              </div>
@@ -90,8 +90,8 @@
 	              <table class="table table-hover">
 	              	<tr>
 	                  <th>#</th>
-	                  <th>Employee Name</th>
-	                  <th>Username</th>
+	                  <th>Name</th>
+	                  <th>Email</th>
 	                  <th>Role Name</th>
 	                  <th>Created at</th>
 	                  <th>Updated at</th>
@@ -105,8 +105,8 @@
 	         		
 	         			<tr style="font-weight: normal;" bgcolor="<?php if(($key + $user_role_list->firstItem())%2==1) echo "#eaeef1"; else echo "#ffffff"?>">
 		         			<td>{{$key + $user_role_list->firstItem()}}</td>
-		         			<td>{{$user_role->user->full_name}} </td>
-		         			<td>{{$user_role->user->username}}</td>
+		         			<td>{{$user_role->user->name}} </td>
+		         			<td>{{$user_role->user->email}}</td>
 		         			<td>{{$user_role->role->display_name}}</td>
 		         			<td>{{$user_role->created_at}}</td>
 		         			<td>{{$user_role->updated_at}}</td>

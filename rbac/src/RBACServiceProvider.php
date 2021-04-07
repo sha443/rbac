@@ -24,6 +24,7 @@ class RBACServiceProvider extends ServiceProvider
         
         // push middleware to the web group
         $this->app['router']->pushMiddlewareToGroup('rbac', \sha443\rbac\Http\Middleware\RolesAuth::class);
+        $this->app['router']->pushMiddlewareToGroup('rbac', \sha443\rbac\Http\Middleware\RolesMenu::class);
 
         // publish assets
         $this->publishes(

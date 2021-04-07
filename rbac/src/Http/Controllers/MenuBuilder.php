@@ -66,7 +66,7 @@ class MenuBuilder extends Controller
             $role_menus = RoleMenu::with('menu')->where('role_id', $role->role_id)->get();
             foreach ($role_menus as $key => $menus)
             {
-                if(!is_null($menus->menu))
+                if(!is_null($menus->menu) && $menus->menu->active)
                 {
                     $menu_items[] = $menus->menu;
                 }
@@ -93,7 +93,7 @@ class MenuBuilder extends Controller
 
             foreach ($role_menus as $key => $menus)
             {
-                if(!is_null($menus->menu))
+                if(!is_null($menus->menu) && $menus->menu->active)
                 {
                     $menu_items[] = $menus->menu;
                 }

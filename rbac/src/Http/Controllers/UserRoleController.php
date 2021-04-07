@@ -130,9 +130,10 @@ class UserRoleController extends LaravelController
         {
             // Edit/Update
             $user_role = UserRole::with('user','role')->find($id);
-            $user_list = User::get()->where('active',1)->where('level', "Staff");
+            $user_list = User::get();
             $role_list = Role::get()->where('active',1);
-            return view('users.edit-role',compact('user_role','title','user_list','role_list'));
+
+            return view('rbac::roles.edit-user-role',compact('user_role','title','user_list','role_list'));
       
         }
     }
@@ -158,19 +159,8 @@ class UserRoleController extends LaravelController
             return redirect()->back();
         }
 
-        // Protected user role for superadmin and HR
-        if($request->input('user_id')==1001)
-        {
-            self::danger("Are you kidding me?");
-            return redirect('/user-role/');
-        }
-        else if($request->input('user_id')==1002 || $request->input('user_id')==2)
-        {
-            self::danger("Illegal action!");
-            return redirect('/user-role/');
-        }
-
         $user_role->update($request->all());
+        
         self::success('User Role updated successfully!');
         return redirect('/user-role/');
     }
