@@ -24,23 +24,45 @@ class RolePermissionController extends LaravelController
 
         return view('rbac::permission.index',compact('role_permission_list','title'));
     }
-    public function create($role_id,$old_role_permission_id_array=NULL)
+    public function create($role_id, $old_role_permission_id_array=NULL)
     {
         $title = "Role Permission";
-        $permission_list = Permission::orderBy('display_name')->orderBy('method')->get();
-        // $role_list = Role::get()->where('active',1);
-        $role_list = Role::get();
+        $permission_list = Permission::orderBy('display_name')->orderBy('display_name')->orderBy('method')->get();
+        // dd($permission_list);
+        // group permissons by controller name
+        $permission_groups = array();
+        $current = null;
+        $prevController = null;
+        foreach ($permission_list as $key => $permission)
+        {
+            if($permission->controller===$prevController)
+            {
+                $current[] = $permission;
+                $prevController = $permission->controller;
+            }
+            else
+            {
+                $prevController = $permission->controller;
+                if(!is_null($current) && !is_null($prevController))
+                {
+                    array_push($permission_groups, $current);
+                }
+
+                unset($current);
+
+                $current[] = $permission;
+                $prevController = $permission->controller;
+
+            }
+        }
+
+        // dd($permission_groups);
+
+        $role_list = Role::get()->where('active',1);
+
         $role_permission_list = RolePermission::with('permission','role')->paginate(20);
 
-        if($role_id!=NULL)
-        {
-
-        	return view('rbac::permission.create',compact('role_permission_list','permission_list','role_list','title','role_id','old_role_permission_id_array'));
-        }
-        else
-        {
-        	return view('rbac::permission.create',compact('role_permission_list','permission_list','role_list','title'));
-        }
+        return view('rbac::permission.create',compact('role_permission_list','permission_groups','role_list','title','role_id','old_role_permission_id_array'));
     }
     public function oldPermission(Request $request)
     {
@@ -105,7 +127,9 @@ class RolePermissionController extends LaravelController
     		$this->revokeRolePermission($role_id,$permission_id);
     	}
         self::success('Role permission updated successfully!');
-        return redirect('/role-permission/create');
+        // return redirect('/role-permission/create/');
+
+        return $this->create($role_id, $permissions);
     }
     public function revokeRolePermission($role_id, $permission_id)
     {
