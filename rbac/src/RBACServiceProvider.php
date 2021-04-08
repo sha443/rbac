@@ -4,6 +4,8 @@ namespace sha443\rbac;
 
 use Illuminate\Support\ServiceProvider;
 
+use sha443\rbac\Console\Commands\DbSeed;
+
 class RBACServiceProvider extends ServiceProvider
 {
     /**
@@ -29,7 +31,15 @@ class RBACServiceProvider extends ServiceProvider
         // publish assets
         $this->publishes(
             [__DIR__.'/public/' => public_path('vendor/rbac'), ]
-            , 'public');       
+            , 'public');
+
+        // register commands 
+        if ($this->app->runningInConsole())
+        {
+            $this->commands([
+                DbSeed::class,
+            ]);
+        }
     }
 
     /**
