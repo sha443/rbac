@@ -27,7 +27,7 @@ class RolePermissionController extends LaravelController
     public function create($role_id, $old_role_permission_id_array=NULL)
     {
         $title = "Role Permission";
-        $permission_list = Permission::orderBy('display_name')->orderBy('display_name')->orderBy('method')->get();
+        $permission_list = Permission::orderBy('controller')->orderBy('method')->get();
         // dd($permission_list);
         // group permissons by controller name
         $permission_groups = array();
@@ -35,25 +35,30 @@ class RolePermissionController extends LaravelController
         $prevController = null;
         foreach ($permission_list as $key => $permission)
         {
-            if($permission->controller===$prevController)
+            if($permission->controller==$prevController)
             {
+                // echo $prevController."==".$permission->controller."<br>";
+                // push the controller@method to the current group
                 $current[] = $permission;
-                $prevController = $permission->controller;
             }
             else
             {
-                $prevController = $permission->controller;
+                // echo $prevController."!=".$permission->controller."<br>";
+                // if current group has items and not loop initiating 
                 if(!is_null($current) && !is_null($prevController))
                 {
                     array_push($permission_groups, $current);
                 }
 
+                // unset old and create a new group
                 unset($current);
-
                 $current[] = $permission;
-                $prevController = $permission->controller;
 
             }
+
+            // hold the loop prev controller 
+            $prevController = $permission->controller;
+
         }
 
         // dd($permission_groups);
