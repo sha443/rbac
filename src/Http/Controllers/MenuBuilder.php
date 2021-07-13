@@ -10,7 +10,6 @@ Developed at: CICT, Villa College
 namespace sha443\rbac\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 
 use Auth;
 
@@ -21,7 +20,7 @@ use sha443\rbac\Models\RoleMenu;
 use App\User;
 use sha443\rbac\Models\UserRole;
 
-class MenuBuilder extends Controller
+class MenuBuilder extends RBACBaseController
 {
     /*
     |--------------------------------------------------------------------------

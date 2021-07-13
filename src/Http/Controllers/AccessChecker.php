@@ -10,7 +10,6 @@ Developed at: CICT, Villa College
 namespace sha443\rbac\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 
 // Laravel app default user
 use App\User;
@@ -22,7 +21,7 @@ use sha443\rbac\Models\RolePermission;
 use sha443\rbac\Models\Menu;
 use sha443\rbac\Models\RoleMenu;
 
-class AccessChecker extends Controller
+class AccessChecker extends RBACBaseController
 {
     /*
     |--------------------------------------------------------------------------

@@ -11,14 +11,14 @@
 namespace sha443\rbac\Http\Controllers;
 
 use sha443\rbac\Models\UserRole;
-use App\User;
+use sha443\rbac\Models\DummyUser;
 use sha443\rbac\Models\Role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Routing\Route;
 use Exception;
 
-class UserRoleController extends LaravelController
+class UserRoleController extends RBACBaseController
 {
     /**
      * Display a listing of the resource.
@@ -29,7 +29,7 @@ class UserRoleController extends LaravelController
     public function index($search_result=NULL)
     {
         $title = "User role";
-        $user_list = User::get();
+        $user_list = DummyUser::get();
         $role_list = Role::where('active',1)->get();
         $user_role_list = UserRole::with('user','role')->paginate(20);
 
@@ -130,7 +130,7 @@ class UserRoleController extends LaravelController
         {
             // Edit/Update
             $user_role = UserRole::with('user','role')->find($id);
-            $user_list = User::get();
+            $user_list = DummyUser::get();
             $role_list = Role::get()->where('active',1);
 
             return view('rbac::roles.edit-user-role',compact('user_role','title','user_list','role_list'));

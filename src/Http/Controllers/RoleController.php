@@ -1,5 +1,6 @@
 <?php
 
+
 #==========================
 # Author: Shahid
 # Date: April 2021
@@ -9,10 +10,10 @@
 
 namespace sha443\rbac\Http\Controllers;
 
-use sha443\rbac\Models\Menu;
+use sha443\rbac\Models\Role;
 use Illuminate\Http\Request;
 
-class MenuController extends LaravelController
+class RoleController extends RBACBaseController
 {
     /**
      * Display a listing of the resource.
@@ -21,9 +22,10 @@ class MenuController extends LaravelController
      */
     public function index()
     {
-        $title = "Menu List";
-        $menu_list = Menu::paginate(20);
-        return view('rbac::menus.index',compact('menu_list','title'));
+        $title = "Role List";
+        $role_list = Role::paginate(20);
+        return view('rbac::roles.index', compact('role_list','title'));
+
     }
 
     /**
@@ -34,30 +36,27 @@ class MenuController extends LaravelController
     public function addEdit(Request $request)
     {
         $this->validate($request, [
-            'action'=>'required',
+            'name'=>'required',
             'display_name'=>'required',
         ]);
         $id = $request->input('id');
-
         if($id)
         {
             // Edit/Update
-            $menu = Menu::find($id);
-            $menu->action = $request->input('action');
-            $menu->display_name = $request->input('display_name');
-            $menu->icon = $request->input('icon');
-            $menu->level = $request->input('level');
-            $menu->active = $request->input('active');
-            $menu->save();
-            self::success('Menu updated successfully!');
-            return redirect()->back();
+            $role = Role::find($id);
+            $role->name = $request->input('name');
+            $role->display_name = $request->input('display_name');
+            $role->active = $request->input('active');
+            $role->save();
+            self::success('Role updated successfully!');
+            return redirect('/role/');
         }
         else
         {
             // create new one
-            Menu::create($request->all());
-            self::success('Menu created successfully!');
-            return redirect()->back();
+            Role::create($request->all());
+            self::success('Role created successfully!');
+            return redirect('/role/');
         }
 
     }
@@ -76,10 +75,10 @@ class MenuController extends LaravelController
     /**
      * Display the specified resource.
      *
-     * @param  \App\Menu  $menu
+     * @param  \App\Role  $role
      * @return \Illuminate\Http\Response
      */
-    public function show(Menu $menu)
+    public function show(Role $role)
     {
         //
     }
@@ -87,10 +86,10 @@ class MenuController extends LaravelController
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Menu  $menu
+     * @param  \App\Role  $role
      * @return \Illuminate\Http\Response
      */
-    public function edit(Menu $menu)
+    public function edit(Role $role)
     {
         //
     }
@@ -99,10 +98,10 @@ class MenuController extends LaravelController
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Menu  $menu
+     * @param  \App\Role  $role
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Menu $menu)
+    public function update(Request $request, Role $role)
     {
         //
     }
@@ -110,10 +109,10 @@ class MenuController extends LaravelController
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Menu  $menu
+     * @param  \App\Role  $role
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Menu $menu)
+    public function destroy(Role $role)
     {
         //
     }

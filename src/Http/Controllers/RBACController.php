@@ -14,9 +14,9 @@ use Illuminate\Http\Request;
 
 use Auth;
 
-use App\User;
+use sha443\rbac\Models\DummyUser;
 
-class RBACController extends LaravelController
+class RBACController extends RBACBaseController
 {
     /*
     |--------------------------------------------------------------------------

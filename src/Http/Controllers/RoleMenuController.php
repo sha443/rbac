@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Validator;
 use sha443\rbac\Models\Role;
 use sha443\rbac\Models\Menu;
 
-class RoleMenuController extends LaravelController
+class RoleMenuController extends RBACBaseController
 {
     /**
      * Display a listing of the resource.

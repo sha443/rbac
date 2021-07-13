@@ -4,6 +4,7 @@ namespace sha443\rbac;
 
 use Illuminate\Support\ServiceProvider;
 
+use sha443\rbac\Console\Commands\Install;
 use sha443\rbac\Console\Commands\DbSeed;
 
 class RBACServiceProvider extends ServiceProvider
@@ -37,6 +38,7 @@ class RBACServiceProvider extends ServiceProvider
         if ($this->app->runningInConsole())
         {
             $this->commands([
+                Install::class,
                 DbSeed::class,
             ]);
         }

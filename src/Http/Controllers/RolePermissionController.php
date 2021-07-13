@@ -15,7 +15,7 @@ use sha443\rbac\Models\RolePermission;
 use sha443\rbac\Models\Role;
 use sha443\rbac\Models\Permission;
 
-class RolePermissionController extends LaravelController
+class RolePermissionController extends RBACBaseController
 {
     public function index($search_result=NULL)
     {

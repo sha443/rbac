@@ -87,7 +87,7 @@
 
 			             	@if($group_all_check)
 
-			             		<input type="checkbox" name="select-group" id="{{$key}}" onclick="toggleChekbox(this.id);" checked /><span class="checkboxtext alert-info"> &nbsp;Select all in {{ $key }}</span> <br>
+			             		<input type="checkbox" name="select-group" id="{{$key}}" onclick="toggleChekbox(this.id);" checked /><span class="checkboxtext alert-info"> &nbsp;Toggle all in {{ $key }}</span> <br>
 
 			             	@else
 			             		<input type="checkbox" name="select-group" id="{{$key}}" onclick="toggleChekbox(this.id);" /><span class="checkboxtext alert-info"> &nbsp;Toggle all in {{ $key }}</span> <br>

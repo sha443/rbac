@@ -12,6 +12,8 @@ class RBACSeeder extends Seeder
      */
     public function run()
     {
+        $this->call(RolesTableSeeder::class);
+        $this->call(MenusTableSeeder::class);
         $this->call(PermissionsTableSeeder::class);
         $this->call(RoleMenusTableSeeder::class);
     }

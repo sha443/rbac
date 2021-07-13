@@ -12,7 +12,7 @@ class UserRole extends Model
 
     public function user()
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo('sha443\rbac\Models\DummyUser');
     }
     public function role()
     {
