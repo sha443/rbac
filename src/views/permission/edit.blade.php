@@ -6,7 +6,7 @@
 	<div class="row">
 		<div class="col-xs-3"></div>
 		<div class="col-xs-6">
-			<form action="/user-role/{{$user_role->id}}" method="POST" role="search">
+			<form action="{{ route('user_role_update') }}/{{$user_role->id}}" method="POST" role="search">
 			    {{ csrf_field() }}
 			    {{ method_field('PUT') }}
 			    <div style="display: inline-block;">

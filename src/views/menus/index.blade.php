@@ -23,7 +23,7 @@
 		                          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 		                          <h4 class="modal-title">Add New Menu Item</h4>
 		                        </div>
-		                        <form action="/menu" method="post">
+		                        <form action="{{ route('manu_create') }}" method="post">
 		                        	{{ csrf_field() }}
 			                        <div class="modal-body">
 			                          <div class="box-body">
@@ -45,11 +45,7 @@
 			                              </div>
 			                              <div class="form-group">
 			                                <label>Display Level</label>
-			                                <select class="form-control"  name="level">
-			                                	<option value="1">Main Menu</option>
-			                                	<option value="2">Settings</option>
-			                                	<option value="3">Others</option>
-			                                </select>
+			                                <input type="text" name="level" required placeholder="0, 1, 2 ... etc.">
 			                              </div>
 			                              <div class="form-group">
 			                                <label>Active</label>

@@ -11,7 +11,7 @@
 	<div class="row">
 		<div class="col-xs-3"></div>
 		<div class="col-xs-6">
-			<form action="/user-role" method="POST" role="search">
+			<form action="{{ route('user_role_store') }}" method="POST" role="search">
 			    {{ csrf_field() }}
 			    <div style="display: inline-block;">
 			    	<div class="input-group">
@@ -112,7 +112,7 @@
 		         			<td>{{$user_role->updated_at}}</td>
 
 
-		         			<td><a href="user-role/edit/{{ $user_role->id }}"><i class="fa fa-edit"></i></a></td>
+		         			<td><a href="{{ route('user_role_edit') }}/{{ $user_role->id }}"><i class="fa fa-edit"></i></a></td>
 	             		</tr>
 	             	@endforeach
 

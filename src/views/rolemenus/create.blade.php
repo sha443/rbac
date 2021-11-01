@@ -25,7 +25,7 @@
 	<div class="row">
 		<div class="col-xs-3"></div>
 		<div class="col-xs-6">
-			<form action="/role-menu/old-menu" method="GET">
+			<form action="{{ route('role_menu_retrive') }}" method="GET">
 			    {{ csrf_field() }}
 			    <div style="display: inline-block;">
 			    	<div class="input-group">
@@ -52,7 +52,7 @@
 				    </div>
 			    </div>
 			</form>
-			<form action="/role-menu" method="POST">
+			<form action="{{ route('role_menu_store') }}" method="POST">
 			    {{ csrf_field() }}
 			    <div style="display: inline-block;">
 			    	<div class="input-group">
