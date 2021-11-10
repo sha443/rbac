@@ -14,8 +14,6 @@
 	                    </div>
 						<div class="input-group input-group-sm">
 
-		                  
-
 		                  <div class="modal fade" id="myModal" tabindex="-1" role="dialog">
 		                    <div class="modal-dialog" role="document">
 		                      <div class="modal-content">
@@ -41,7 +39,7 @@
 			                              </div>
 			                              <div class="form-group">
 			                                <label>Active</label>
-			                                <select class="form-control"  name="active">
+			                                <select class="form-control"  name="active" id='active'>
 			                                	<option value="1">1</option>
 			                                	<option value="0">0</option>
 			                                </select>
@@ -91,7 +89,7 @@
 		         			<td>{{$role->created_at}}</td>
 		         			<td>{{$role->updated_at}}</td>
 		         			<td>{{$role->active}}</td>
-		         			<td><button type="button" class="btn btn-success btn-xs"  onclick="editItem({{$role->id}},'{{ $role->name }}','{{ $role->display_name }}')"><i class="fa fa-edit"></i></button></td>
+		         			<td><button type="button" class="btn btn-success btn-xs"  onclick="editItem({{$role->id}},'{{ $role->name }}','{{ $role->display_name }}','{{ $role->active }}')"><i class="fa fa-edit"></i></button></td>
 	             		</tr>
 	             	@endforeach
 
@@ -109,11 +107,12 @@
 
 @section('script')
 <script type="text/javascript">
-	function editItem(id, name, display_name)
+	function editItem(id, name, display_name, active)
 	{
 		document.getElementById('id').value = id;
 		document.getElementById('name').value = name;
 		document.getElementById('display_name').value = display_name;
+		document.getElementById('active').value = active;
 		$("#myModal").modal();
 	}
 </script>

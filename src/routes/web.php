@@ -11,8 +11,10 @@ Route::group(['prefix' => 'rbac'], function() {
 		// Settings routes [SuperAdmin]
 		// ===================================
 
-		// User CRUD route
-
+		// Home
+		Route::get('/', function(){
+			echo "This is the RBAC Module";
+		});
 		// Role CRUD route
 		Route::get('/role','sha443\rbac\Http\Controllers\RoleController@index')->name('role_index');
 		Route::post('/role/','sha443\rbac\Http\Controllers\RoleController@addEdit')->name('role_create');

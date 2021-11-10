@@ -45,11 +45,11 @@
 			                              </div>
 			                              <div class="form-group">
 			                                <label>Display Level</label>
-			                                <input type="text" name="level" required placeholder="0, 1, 2 ... etc.">
+			                                <input type="text" class="form-control" name="level" required placeholder="0, 1, 2 ... etc.">
 			                              </div>
 			                              <div class="form-group">
 			                                <label>Active</label>
-			                                <select class="form-control"  name="active">
+			                                <select class="form-control"  name="active" id='active'>
 			                                	<option value="1">1</option>
 			                                	<option value="0">0</option>
 			                                </select>
@@ -103,7 +103,7 @@
 		         			<td>{{$menu->created_at}}</td>
 		         			<td>{{$menu->updated_at}}</td>
 		         			<td>{{$menu->active}}</td>
-		         			<td><button type="button" class="btn btn-success btn-xs"  onclick="editItem({{$menu->id}},'{{ $menu->action }}','{{ $menu->display_name }}','{{ $menu->icon }}')"><i class="fa fa-edit"></i></button></td>
+		         			<td><button type="button" class="btn btn-success btn-xs"  onclick="editItem({{$menu->id}},'{{ $menu->action }}','{{ $menu->display_name }}','{{ $menu->icon }}','{{ $menu->active }}')"><i class="fa fa-edit"></i></button></td>
 	             		</tr>
 	             	@endforeach
 
@@ -121,12 +121,13 @@
 
 @section('script')
 <script type="text/javascript">
-	function editItem(id, action, display_name, icon)
+	function editItem(id, action, display_name, icon, active)
 	{
 		document.getElementById('id').value = id;
 		document.getElementById('action').value = action;
 		document.getElementById('display_name').value = display_name;
 		document.getElementById('icon').value = icon;
+		document.getElementById('active').value = active;
 		$("#myModal").modal();
 	}
 </script>

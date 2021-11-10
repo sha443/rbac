@@ -108,7 +108,7 @@ class RoleMenuController extends RBACBaseController
             $this->revokeRoleMenu($role_id,$menu_id);
         }
         self::success('Role Menu updated successfully!');
-        return redirect('/role-menu/create');
+        return redirect(route('role_menu_create'));
     }
     public function revokeRoleMenu($role_id, $menu_id)
     {

@@ -49,14 +49,14 @@ class RoleController extends RBACBaseController
             $role->active = $request->input('active');
             $role->save();
             self::success('Role updated successfully!');
-            return redirect('/role/');
+            return redirect(route('role_index'));
         }
         else
         {
             // create new one
             Role::create($request->all());
             self::success('Role created successfully!');
-            return redirect('/role/');
+            return redirect(route('role_index'));
         }
 
     }

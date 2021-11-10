@@ -112,7 +112,7 @@
 		         			<td>{{$user_role->updated_at}}</td>
 
 
-		         			<td><a href="{{ route('user_role_edit') }}/{{ $user_role->id }}"><i class="fa fa-edit"></i></a></td>
+		         			<td><a href="{{ route('user_role_edit', $user_role->id) }}"><i class="fa fa-edit"></i></a></td>
 	             		</tr>
 	             	@endforeach
 

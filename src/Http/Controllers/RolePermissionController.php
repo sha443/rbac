@@ -132,7 +132,6 @@ class RolePermissionController extends RBACBaseController
     		$this->revokeRolePermission($role_id,$permission_id);
     	}
         self::success('Role permission updated successfully!');
-        // return redirect('/role-permission/create/');
 
         return $this->create($role_id, $permissions);
     }

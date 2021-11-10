@@ -62,6 +62,12 @@ class Install extends Command
                 echo "Db seeding completed! \nRoutes are converted to permissions\nPermissions & Menus are assigned to default role `admin``\n\n";
             }
 
+            $response = Artisan::call('php artisan vendor:publish --provider=sha443\rbac\RBACServiceProvider');
+            if($response==0)
+            {
+                echo "Assets published!";
+            }
+
             // Creating users
             echo "Create a user\n";
             while(empty($name))
@@ -87,7 +93,6 @@ class Install extends Command
                 'user_id' => $user->id,
                 'role_id' => 1
             ]);
-
             echo "You are now an admin! Enjoy!\n\n";
         }
 

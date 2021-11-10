@@ -162,7 +162,7 @@ class UserRoleController extends RBACBaseController
         $user_role->update($request->all());
         
         self::success('User Role updated successfully!');
-        return redirect('/user-role/');
+        return redirect(route('user_role_index'));
     }
 
     /**
