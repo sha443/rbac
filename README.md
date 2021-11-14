@@ -1,14 +1,26 @@
+
 # RBAC
 
 A Role-Based Access Control (RBAC) pakcage for Laravel.
 
+***Note: this is for preview access. I will release it on packagist soon.***
+
 ### Installation
 
-Install wia composer:
+**Install via composer (currently unavailable)**
 
-```
-composer require sha443/rbac
-```
+~~composer require sha443/rbac~~
+
+
+**Manual Installation:**
+
+Clone to your package/vendor folder.
+
+    git clone git@github.com:sha443/rbac.git
+
+And to psr-4 autoload in ***composer.json***
+
+    "sha443\\rbac\\": "packages/sha443/rbac/src",
 
 And add the service provider in config/app.php:
 
@@ -22,11 +34,13 @@ Then register Facade class aliase:
 'RBAC' => sha443\rbac\RBAC::class,
 ```
 
-Publish assets:
+Install with data:
 
 ```
-php artisan vendor:publish
+php artisan rbac:install
 ```
+
+Login to your app and go to /rbac/menu as a start point.
 
 ## License
 
