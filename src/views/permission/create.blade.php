@@ -63,35 +63,41 @@
 			                <br>
 			               @foreach($permission_groups as $permission_list)
 			               @php 
-			               		$key = explode( '@', $permission_list[0]->display_name)[0];
+			               		$key_value = explode( '@', $permission_list[0]->display_name);
+								$key = $key_value[0];
 			               		$group_all_check = 1;
 			               @endphp
 			               
 			               <div class="form-group">
+
+						   	
+
 			                 @foreach($permission_list as $permission)
 			                 <?php 
 
 			                 	if(isset($old_role_permission_id_array) && in_array($permission->id,$old_role_permission_id_array))
 			                 	{
 
-			                 		echo  '<input type="checkbox" name="permission['.$permission->id .']" data-group="'.$key.'"  id="'.$permission->id.'" value="'.$permission->id.'" checked /> <span class="checkboxtext"> &nbsp;'.$permission->display_name.' </span> <br>';
+			                 		echo  '<input type="checkbox" name="permission['.$permission->id .']" data-group="'.$key.'"  id="'.$permission->id.'" value="'.$permission->id.'" checked /> <span class="checkboxtext"> &nbsp;'.(explode('@', $permission->display_name)[1]).' </span> <br>';
 			                 	}
 			                 	else
 			                 	{
-			                 		echo '<input type="checkbox"  name="permission['.$permission->id .']" data-group="'.$key.'" id="'.$permission->id.'" value="'.$permission->id.'" /> <span class="checkboxtext"> &nbsp;'.$permission->display_name.' </span> <br>';
+			                 		echo '<input type="checkbox"  name="permission['.$permission->id .']" data-group="'.$key.'" id="'.$permission->id.'" value="'.$permission->id.'" /> <span class="checkboxtext"> &nbsp;'.(explode('@', $permission->display_name)[1]).' </span> <br>';
 
 			                 		$group_all_check = 0;
 			                 	}
 			                 ?>
 			             	@endforeach
 
-			             	@if($group_all_check)
+							<!-- need to loop first, will be remove and placed on top in future, may use css -->
+							@if($group_all_check)
 
-			             		<input type="checkbox" name="select-group" id="{{$key}}" onclick="toggleChekbox(this.id);" checked /><span class="checkboxtext alert-info"> &nbsp;Toggle all in {{ $key }}</span> <br>
+							<input type="checkbox" name="select-group" id="{{$key}}" onclick="toggleChekbox(this.id);" checked /><span class="checkboxtext text-info"> &nbsp; {{ $key }}</span> <br>
 
-			             	@else
-			             		<input type="checkbox" name="select-group" id="{{$key}}" onclick="toggleChekbox(this.id);" /><span class="checkboxtext alert-info"> &nbsp;Toggle all in {{ $key }}</span> <br>
-			             	@endif
+							@else
+							<input type="checkbox" name="select-group" id="{{$key}}" onclick="toggleChekbox(this.id);" /><span class="checkboxtext text-info"> &nbsp; {{ $key }}</span> <br>
+							@endif
+			             	
 
 			             </div>
 			             @endforeach

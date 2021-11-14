@@ -53,15 +53,15 @@ class RolesMenu
         // Buildup the menu
         foreach($menus as $menu)
         {
-            if($menu->level==1)
+            if($menu->level==0)
             {
                 array_push($main_menu, $menu);
             }
-            else if($menu->level==2)
+            else if($menu->level==1)
             {
                 array_push($settings_menu, $menu);
             }
-            else if($menu->level==3)
+            else if($menu->level==2)
             {
                 array_push($others_menu, $menu);
             }

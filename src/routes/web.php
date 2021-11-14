@@ -46,21 +46,18 @@ Route::group(['prefix' => 'rbac'], function() {
 });
 
 
-// must be used with middlewares
-Route::group(['middleware'=>['web', 'auth']], function(){
-	// Route::get('/rbac-facade', function(){
-	// 	dd(sha443\rbac\facades\RBAC::getMenuItems(1));
-	// });
+// facades test
+Route::group(['middleware'=>'web'], function(){
 
-	Route::get('/rbac-menu', function(){
+	Route::get('/rbac/test/menu', function(){
 		dd(sha443\rbac\facades\RBAC::getMenuByLevel(1, 1));
 	});
 
-	Route::get('/rbac-menu-all', function(){
+	Route::get('/rbac/test/menu-all', function(){
 		dd(sha443\rbac\facades\RBAC::getMenuItems(1));
 	});
 
-	Route::get('/rbac-failed', function(Illuminate\Http\Request $request){
+	Route::get('/rbac/test/pass', function(Illuminate\Http\Request $request){
 		dd(sha443\rbac\facades\RBAC::isRequestPassed(1, $request));
 	});
 });
