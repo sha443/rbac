@@ -14,7 +14,7 @@ A Role-Based Access Control (RBAC) pakcage for Laravel.
 
 **Manual Installation:**
 
-Clone to your package/vendor folder.
+Clone to your package/sha443 folder.
 
     git clone git@github.com:sha443/rbac.git
 
@@ -32,6 +32,12 @@ Then register Facade class aliase:
 
 ```php
 'RBAC' => sha443\rbac\RBAC::class,
+```
+
+Run the command:
+
+```
+composer dump-autoload
 ```
 
 Install with data:
